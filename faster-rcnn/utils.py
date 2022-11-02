@@ -543,15 +543,19 @@ def get_demo_path():
 
 
 def img_tensorize(im, input_format="RGB"):
-    assert isinstance(im, str)
-    if os.path.isfile(im):
-        img = cv2.imread(im)
-    else:
-        img = get_image_from_url(im)
-        assert img is not None, f"could not connect to: {im}"
-    img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    #assert isinstance(im, str)
+    #if os.path.isfile(im):
+    #    img = cv2.imread(im)
+    #else:
+    #    img = get_image_from_url(im)
+    #    assert img is not None, f"could not connect to: {im}"
+    #img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+    #if input_format == "RGB":
+    #    img = img[:, :, ::-1]
+    numpy_image = np.array(im)
+    img = cv2.cvtColor(numpy_image, cv2.COLOR_RGB2BGR)
     if input_format == "RGB":
-        img = img[:, :, ::-1]
+    	img = img[:, :, ::-1]
     return img
 
 
